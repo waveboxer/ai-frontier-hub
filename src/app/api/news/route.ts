@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { fetchNews } from "@/lib/fetchers/news";
 
-export const revalidate = 900;
+export const revalidate = 300;
 
 export async function GET() {
   try {

@@ -5,7 +5,7 @@ export interface NewsItem {
   source: string;
   pubDate: string;
   description?: string;
-  category?: "llm" | "hardware" | "general";
+  category?: "industry" | "tech" | "product" | "general";
 }
 
 export interface HardwareListing {

@@ -13,17 +13,26 @@ const SOURCE_COLORS: Record<string, string> = {
   "36氪": "bg-orange-500/20 text-orange-300 border-orange-500/30",
   量子位: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
   机器之心: "bg-purple-500/20 text-purple-300 border-purple-500/30",
+  // Search-based sources
+  腾讯元宝: "bg-blue-500/20 text-blue-300 border-blue-500/30",
+  IT之家: "bg-green-500/20 text-green-300 border-green-500/30",
+  搜狐: "bg-red-500/20 text-red-300 border-red-500/30",
+  新浪财经: "bg-yellow-500/20 text-yellow-300 border-yellow-500/30",
+  财联社: "bg-pink-500/20 text-pink-300 border-pink-500/30",
+  CSDN: "bg-indigo-500/20 text-indigo-300 border-indigo-500/30",
 };
 
 const CATEGORY_LABELS: Record<string, string> = {
-  llm: "大模型",
-  hardware: "算力硬件",
+  industry: "行业",
+  tech: "技术",
+  product: "产品",
   general: "综合",
 };
 
 const CATEGORY_COLORS: Record<string, string> = {
-  llm: "bg-violet-500/20 text-violet-300 border-violet-500/30",
-  hardware: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+  industry: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+  tech: "bg-violet-500/20 text-violet-300 border-violet-500/30",
+  product: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30",
   general: "bg-slate-700/50 text-slate-300 border-slate-600",
 };
 
@@ -31,11 +40,11 @@ export function NewsSection({ items }: { items: NewsItem[] }) {
   return (
     <section id="news" className="scroll-mt-24">
       <div className="mb-6 flex items-center gap-3">
-        <span className="text-2xl">📰</span>
+        <span className="text-2xl">🔥</span>
         <div>
-          <h2 className="text-xl font-bold text-white">AI 科技新闻</h2>
+          <h2 className="text-xl font-bold text-white">今日AI科技热点</h2>
           <p className="text-sm text-slate-400">
-            聚焦大模型、算力硬件、AI 产业动态 · 36氪 · 量子位 · 机器之心
+            AI行业动态 · 技术突破 · 产品发布 · 每日动态更新
           </p>
         </div>
       </div>
