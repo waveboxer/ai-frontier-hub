@@ -74,18 +74,14 @@ function TutorialPanel({ tutorial }: { tutorial: Tutorial }) {
 
       <div className="flex flex-wrap gap-3">
         <a
-          href={tutorial.officialUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={`/view?url=${encodeURIComponent(tutorial.officialUrl)}&title=${encodeURIComponent(tutorial.name + ' 官方网站')}&source=${encodeURIComponent(tutorial.name)}`}
           className="rounded-lg bg-cyan-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-cyan-500"
         >
           官方网站 →
         </a>
         {tutorial.docUrl && (
           <a
-            href={tutorial.docUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/view?url=${encodeURIComponent(tutorial.docUrl)}&title=${encodeURIComponent(tutorial.name + ' 官方文档')}&source=${encodeURIComponent(tutorial.name)}`}
             className="rounded-lg border border-slate-700 px-4 py-2 text-sm text-slate-300 transition hover:border-slate-500"
           >
             查看文档 →

@@ -30,11 +30,10 @@ const PROVIDER_COLORS: Record<string, string> = {
 };
 
 function PromoCard({ item }: { item: Promotion }) {
+  const viewUrl = `/view?url=${encodeURIComponent(item.url)}&title=${encodeURIComponent(item.title)}&source=${encodeURIComponent(item.provider)}`;
   return (
     <a
-      href={item.url}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={viewUrl}
       className={`group rounded-xl border border-slate-800 bg-gradient-to-br p-5 transition hover:border-slate-600 ${PROVIDER_COLORS[item.provider] ?? "from-slate-800/20 to-slate-900/10"}`}
     >
       <div className="mb-3 flex flex-wrap items-center gap-2">

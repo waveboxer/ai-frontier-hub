@@ -7,11 +7,10 @@ function formatStars(n: number) {
 }
 
 function RepoCard({ repo }: { repo: GitHubRepo }) {
+  const viewUrl = `/view?url=${encodeURIComponent(repo.url)}&title=${encodeURIComponent(repo.fullName + ' - GitHub')}&source=GitHub`;
   return (
     <a
-      href={repo.url}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={viewUrl}
       className="group flex flex-col rounded-xl border border-slate-800 bg-slate-900/50 p-4 transition hover:border-violet-500/40 hover:bg-slate-900"
     >
       <div className="mb-2 flex items-start justify-between gap-2">

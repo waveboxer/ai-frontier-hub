@@ -28,12 +28,12 @@ export function ApplicationsSection({ items }: { items: ApplicationCase[] }) {
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2">
-          {items.map((item) => (
+          {items.map((item) => {
+            const viewUrl = `/view?url=${encodeURIComponent(item.link)}&title=${encodeURIComponent(item.title)}&source=${encodeURIComponent(item.source)}`;
+            return (
             <a
               key={item.id}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={viewUrl}
               className="group rounded-xl border border-slate-800 bg-gradient-to-br from-slate-900/80 to-slate-900/40 p-5 transition hover:border-emerald-500/30"
             >
               <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -61,7 +61,8 @@ export function ApplicationsSection({ items }: { items: ApplicationCase[] }) {
                 {item.description}
               </p>
             </a>
-          ))}
+            );
+          })}
         </div>
       )}
     </section>

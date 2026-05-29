@@ -89,9 +89,7 @@ export function HardwareSection({
                           <td className="max-w-xs truncate px-4 py-3 text-white">
                             {item.link ? (
                               <a
-                                href={item.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href={`/view?url=${encodeURIComponent(item.link)}&title=${encodeURIComponent(item.name)}&source=${encodeURIComponent(item.retailer)}`}
                                 className="hover:text-cyan-300"
                               >
                                 {item.name}

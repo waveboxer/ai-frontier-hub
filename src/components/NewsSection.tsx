@@ -55,12 +55,12 @@ export function NewsSection({ items }: { items: NewsItem[] }) {
         </div>
       ) : (
         <div className="grid gap-3">
-          {items.map((item) => (
+          {items.map((item) => {
+            const viewUrl = `/view?url=${encodeURIComponent(item.link)}&title=${encodeURIComponent(item.title)}&source=${encodeURIComponent(item.source)}`;
+            return (
             <a
               key={item.id}
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={viewUrl}
               className="group rounded-xl border border-slate-800 bg-slate-900/50 p-4 transition hover:border-cyan-500/40 hover:bg-slate-900"
             >
               <div className="mb-2 flex flex-wrap items-center gap-2">
@@ -89,7 +89,8 @@ export function NewsSection({ items }: { items: NewsItem[] }) {
                 </p>
               )}
             </a>
-          ))}
+            );
+          })}
         </div>
       )}
     </section>
