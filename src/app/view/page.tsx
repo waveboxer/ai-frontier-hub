@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import { fetchAndClean } from "@/lib/fetchers/view";
+import { ViewShell } from "./ViewShell";
 
 export const dynamic = "force-dynamic";
 
@@ -19,9 +19,9 @@ export default async function ViewPage({ searchParams }: Props) {
 
   if (!url) {
     return (
-      <Layout title="缺少链接参数" originalUrl={null}>
+      <ViewShell title="缺少链接参数" originalUrl={null}>
         <p className="text-slate-400">缺少 URL 参数，无法加载内容。</p>
-      </Layout>
+      </ViewShell>
     );
   }
 
@@ -30,9 +30,9 @@ export default async function ViewPage({ searchParams }: Props) {
     parsedUrl = new URL(url);
   } catch {
     return (
-      <Layout title="无效链接" originalUrl={null}>
+      <ViewShell title="无效链接" originalUrl={null}>
         <p className="text-slate-400">链接格式无效：{url}</p>
-      </Layout>
+      </ViewShell>
     );
   }
 
@@ -40,7 +40,7 @@ export default async function ViewPage({ searchParams }: Props) {
 
   if (result.error) {
     return (
-      <Layout title={paramTitle ?? parsedUrl.hostname} originalUrl={url} siteName={source}>
+      <ViewShell title={paramTitle ?? parsedUrl.hostname} originalUrl={url} siteName={source}>
         <div className="mb-8 rounded-xl border border-red-500/30 bg-red-500/10 p-6">
           <h2 className="mb-2 text-lg font-semibold text-red-400">无法加载此页面</h2>
           <p className="text-sm text-slate-400">{result.error}</p>
@@ -56,14 +56,14 @@ export default async function ViewPage({ searchParams }: Props) {
             <li>• 稍后重试（目标站点可能暂时不可访问）</li>
           </ul>
         </div>
-      </Layout>
+      </ViewShell>
     );
   }
 
   const displayTitle = paramTitle || result.title || parsedUrl.hostname;
 
   return (
-    <Layout title={displayTitle} originalUrl={url} siteName={source}>
+    <ViewShell title={displayTitle} originalUrl={url} siteName={source}>
       {/* Page header */}
       {result.title && (
         <header className="mb-8 border-b border-slate-800 pb-6">
@@ -107,76 +107,6 @@ export default async function ViewPage({ searchParams }: Props) {
           <p className="text-slate-400">该页面内容无法提取，已在上方提供原始链接访问。</p>
         </div>
       )}
-    </Layout>
-  );
-}
-
-// ──────────────────────────────────────────────
-// Shared layout shell
-// ──────────────────────────────────────────────
-function Layout({
-  children,
-  title,
-  originalUrl,
-  siteName,
-}: {
-  children: React.ReactNode;
-  title: string;
-  originalUrl: string | null;
-  siteName?: string;
-}) {
-  return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      {/* Sticky top bar */}
-      <div className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
-        <div className="mx-auto flex max-w-4xl items-center gap-3 px-4 py-3">
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-slate-800 bg-slate-900 px-3 py-1.5 text-xs text-slate-300 transition hover:border-slate-700 hover:text-white"
-          >
-            <span>←</span>
-            <span>返回 AI Frontier Hub</span>
-          </Link>
-
-          <div className="h-4 w-px bg-slate-800" />
-
-          <span className="min-w-0 flex-1 truncate text-xs text-slate-500">
-            {title}
-          </span>
-
-          {originalUrl && (
-            <a
-              href={originalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 whitespace-nowrap rounded-lg border border-cyan-500/40 bg-cyan-500/10 px-3 py-1.5 text-xs text-cyan-300 transition hover:border-cyan-400 hover:bg-cyan-500/20"
-            >
-              <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-              打开原始页面
-            </a>
-          )}
-        </div>
-      </div>
-
-      {/* Content */}
-      <main className="mx-auto max-w-4xl px-4 py-8">
-        {children}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-800 bg-slate-950 py-6 text-center text-xs text-slate-600">
-        <p>
-          内容来源于 {siteName ?? "第三方网站"}，
-          由{" "}
-          <a href="/" className="text-cyan-500 hover:text-cyan-400">
-            AI Frontier Hub
-          </a>{" "}
-          统一呈现
-        </p>
-      </footer>
-    </div>
+    </ViewShell>
   );
 }
